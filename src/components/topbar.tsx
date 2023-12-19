@@ -12,9 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const help = () => {
-    navigate("/map");
-  };
 
   return (
     <div>
@@ -29,7 +26,10 @@ const Topbar = () => {
             width: "100%",
           }}
         >
-          <Button sx={{ color: "#FFD1E3", textTransform: "capitalize" }}>
+          <Button
+            onClick={() => navigate("/login")}
+            sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
+          >
             <Typography variant="h6">Login</Typography>
             <LoginIcon sx={{ ml: 1 }} />
           </Button>
@@ -64,7 +64,7 @@ const Topbar = () => {
                 <Typography variant="h6">Home</Typography>
               </Button>
               <Button
-                onClick={() => help()}
+                onClick={() => navigate("/map")}
                 sx={{
                   display: "block",
                   textTransform: "capitalize",
