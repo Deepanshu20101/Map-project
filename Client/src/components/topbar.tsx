@@ -2,6 +2,7 @@ import {
   AppBar,
   Button,
   ButtonGroup,
+  CssBaseline,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -16,6 +17,7 @@ const Topbar = () => {
   return (
     <div>
       <AppBar sx={{ background: "#392467" }}>
+        <CssBaseline />
         <Toolbar
           variant="dense"
           sx={{
