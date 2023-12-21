@@ -22,6 +22,25 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const foundUser = await User.findOne({ email: email }).exec();
+    if (foundUser) {
+      if (foundUser.password === password) {
+        console.log("Welcome");
+      } else {
+        console.log("incorrect password");
+      }
+    } else {
+      res.sendStatus(401);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_CONNECT);

@@ -10,8 +10,37 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const result = await axios.post("http://localhost:5000/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log(result);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container maxWidth="xs">
       <Box
@@ -26,7 +55,7 @@ const LoginPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">Sign in</Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <form onSubmit={handleSubmit}>
           <TextField
             margin="normal"
             required
@@ -37,6 +66,8 @@ const LoginPage = () => {
             type="email"
             autoComplete="email"
             autoFocus
+            value={formData.email}
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -47,6 +78,8 @@ const LoginPage = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={formData.password}
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -72,7 +105,7 @@ const LoginPage = () => {
               </Link>
             </Grid>
           </Grid>
-        </Box>
+        </form>
       </Box>
     </Container>
   );
