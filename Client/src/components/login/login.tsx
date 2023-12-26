@@ -30,11 +30,12 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const result = await axios.post("http://localhost:5000/login", {
+      const result = await axios.post("http://localhost:5000/user/login", {
         email: formData.email,
         password: formData.password,
       });
       console.log(result);
+      console.log(result.status);
       navigate("/");
     } catch (error) {
       console.log(error);

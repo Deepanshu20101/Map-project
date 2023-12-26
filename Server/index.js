@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const User = require("./models/User");
+const userRoute = require("./routes/userRoute");
 
 dotenv.config();
 
@@ -11,35 +11,7 @@ app.use(express.json());
 app.use(cors());
 const port = 5000;
 
-app.post("/register", async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-    console.log(user);
-    res.status(201).json({ message: "User created successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const foundUser = await User.findOne({ email: email }).exec();
-    if (foundUser) {
-      if (foundUser.password === password) {
-        console.log("Welcome");
-      } else {
-        console.log("incorrect password");
-      }
-    } else {
-      res.sendStatus(401);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+app.use("/user", userRoute);
 
 const startServer = async () => {
   try {
