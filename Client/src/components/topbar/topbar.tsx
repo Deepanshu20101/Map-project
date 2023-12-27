@@ -7,12 +7,21 @@ import {
   Typography,
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import "./topbar.css";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const Topbar = () => {
   const navigate = useNavigate();
+
+  const { currentUser, dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
 
   return (
     <div>
@@ -28,13 +37,32 @@ const Topbar = () => {
             width: "100%",
           }}
         >
-          <Button
-            onClick={() => navigate("/login")}
-            sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
-          >
-            <Typography variant="h6">Login</Typography>
-            <LoginIcon sx={{ ml: 1 }} />
-          </Button>
+          {currentUser ? (
+            <>
+              {/* <Typography variant="h6">{currentUser.firstName}</Typography> */}
+              <Typography
+                variant="h5"
+                sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
+              >
+                {currentUser.firstName}
+              </Typography>
+              <Button
+                onClick={handleLogout}
+                sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
+              >
+                <Typography variant="h6">Logout</Typography>
+                <LogoutIcon sx={{ ml: 1 }} />
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={() => navigate("/login")}
+              sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
+            >
+              <Typography variant="h6">Login</Typography>
+              <LoginIcon sx={{ ml: 1 }} />
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
 

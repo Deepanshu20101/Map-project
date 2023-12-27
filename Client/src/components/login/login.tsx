@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,12 +12,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/authContext";
 
 const LoginPage = () => {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
+
+  const { loading, dispatch } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -28,14 +31,15 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    dispatch({ type: "LOGIN_START" });
     try {
       const result = await axios.post("http://localhost:5000/user/login", {
         email: formData.email,
         password: formData.password,
       });
       console.log(result);
-      console.log(result.status);
+      dispatch({ type: "LOGIN_SUCCESS", payload: result.data.result });
+      // console.log(result.status);
       navigate("/");
     } catch (error) {
       console.log(error);
