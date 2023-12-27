@@ -39,7 +39,6 @@ const Topbar = () => {
         >
           {currentUser ? (
             <>
-              {/* <Typography variant="h6">{currentUser.firstName}</Typography> */}
               <Typography
                 variant="h5"
                 sx={{ color: "#FFD1E3", textTransform: "capitalize" }}
@@ -104,6 +103,9 @@ const Topbar = () => {
                 <Typography variant="h6">Map</Typography>
               </Button>
               <Button
+                onClick={() => {
+                  navigate("/addRoom");
+                }}
                 sx={{
                   display: "block",
                   textTransform: "capitalize",

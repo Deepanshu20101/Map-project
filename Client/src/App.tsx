@@ -6,19 +6,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Map from "./components/map/map";
 import LoginPage from "./components/login/login";
 import SignUp from "./components/login/signup";
+import AddRoom from "./components/addRoom/addRoom";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Topbar />
-        <Routes>
-          <Route path="/" element={<Content />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="*" element={<div>Not found</div>} />
-        </Routes>
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Content />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/addRoom" element={<AddRoom />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="*" element={<div>Not found</div>} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </>
   );
