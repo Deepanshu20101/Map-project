@@ -69,7 +69,10 @@ const Topbar = () => {
           }}
         >
           <Button disableRipple sx={{ textTransform: "capitalize", mr: 5 }}>
-            <Typography variant="h4" sx={{ color: "#8785A2" }}>
+            <Typography
+              variant="h4"
+              sx={{ color: "#8785A2", textShadow: "2px 2px 5px grey" }}
+            >
               Staycation
             </Typography>
           </Button>
