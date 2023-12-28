@@ -1,11 +1,10 @@
-.nav2{
-    display: flex;
-    margin-top: 48px;
-    background-color: #5D3587;
-    
+.nav2 {
+  display: flex;
+  margin-top: 48px;
+  background-color: #ffe2e2;
 }
 
-.nav2-button{
-    display: flex;
-    flex-grow: 1;
+.nav2-button {
+  display: flex;
+  flex-grow: 1;
 }
