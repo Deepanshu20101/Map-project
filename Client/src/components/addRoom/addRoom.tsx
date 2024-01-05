@@ -12,8 +12,8 @@ import {
   StepButton,
   Stepper,
 } from "@mui/material";
-import AddDetails from "./addDetails";
-import AddImages from "./addImages";
+import AddDetails from "./addDetails/addDetails";
+import AddImages from "./addImages/addImages";
 
 const AddRoom = () => {
   const [activeStep, setActiveStep] = useState(0);
