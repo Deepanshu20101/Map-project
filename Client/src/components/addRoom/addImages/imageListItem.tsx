@@ -8,19 +8,29 @@ interface ImageListItemProp {
 }
 
 const ImageListItem: React.FC<ImageListItemProp> = ({ file }) => {
-  const [imageURL, setImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState<string | null>(null);
 
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    const uploadImage = () => {
-      const imgName = uuidv4() + "." + file.name.split(".").pop();
-      UploadFile(file, `${currentUser.id}`, imgName);
+    const imgName = uuidv4() + "." + file.name.split(".").pop();
+    const uploadImage = async () => {
+      try {
+        const url = await UploadFile(file, `${currentUser.id}`, imgName);
+        setImageURL(null);
+      } catch (error) {
+        console.log("upload error ", error);
+      }
     };
+    setImageURL(URL.createObjectURL(file));
     uploadImage();
-  }, [file]);
+  }, [file, currentUser.id]);
 
-  return <div>a</div>;
+  return (
+    <div>
+      {imageURL ? <img src={imageURL} alt="Uploaded" /> : "Uploading..."}
+    </div>
+  );
 };
 
 export default ImageListItem;
