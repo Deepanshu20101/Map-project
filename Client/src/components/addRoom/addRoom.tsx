@@ -63,7 +63,7 @@ const AddRoom = () => {
               </Step>
             ))}
           </Stepper>
-          <Box>
+          <Box sx={{ pb: 7 }}>
             {
               {
                 0: <AddDetails />,
