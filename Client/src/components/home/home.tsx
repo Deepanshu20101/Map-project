@@ -58,9 +58,9 @@ const Content = () => {
   return (
     <>
       <Container>
-        <ImageList gap={12} cols={3}>
+        <ImageList gap={20} cols={3}>
           {imgList.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} sx={{ borderRadius: 3 }}>
               <Grow in>
                 <CardActionArea onClick={() => navigate(`/hotel/${item.id}`)}>
                   <ImageListItem>
