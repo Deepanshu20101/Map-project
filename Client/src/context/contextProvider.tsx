@@ -6,30 +6,43 @@ interface Action {
   payload?: any;
 }
 
-interface contextProviderProps {
-  children: ReactNode;
-}
-
-interface ContextType {
+interface State {
   currentUser: any;
   loading: boolean;
+  images: string[];
+  details: { title: string; description: string };
+}
+
+interface ContextProps {
+  currentUser: any;
+  loading: boolean;
+  images: string[];
+  details: { title: string; description: string };
   dispatch: React.Dispatch<Action>;
 }
 
 const currentUserStorage = localStorage.getItem("currentUser");
 
-const initialState = {
+const initialState: State = {
   currentUser: currentUserStorage ? JSON.parse(currentUserStorage) : null,
   loading: false,
+  images: [],
+  details: { title: "", description: "" },
 };
 
-export const Context = createContext<ContextType>({
-  currentUser: null,
-  loading: false,
-  dispatch: () => null,
+interface ContextProviderProps {
+  children: ReactNode;
+}
+
+export const Context = createContext<ContextProps>({
+  currentUser: initialState.currentUser,
+  loading: initialState.loading,
+  images: initialState.images,
+  details: initialState.details,
+  dispatch: () => {},
 });
 
-export const ContextProvider: React.FC<contextProviderProps> = ({
+export const ContextProvider: React.FC<ContextProviderProps> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -47,6 +60,8 @@ export const ContextProvider: React.FC<contextProviderProps> = ({
       value={{
         currentUser: state.currentUser,
         loading: state.loading,
+        images: state.images,
+        details: state.details,
         dispatch,
       }}
     >

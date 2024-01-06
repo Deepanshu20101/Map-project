@@ -9,13 +9,14 @@ interface ImageListItemProp {
 
 const ImageListItem: React.FC<ImageListItemProp> = ({ file }) => {
   const [imageURL, setImageURL] = useState<string | null>(null);
-  const { currentUser } = useContext(Context);
+  const { currentUser, dispatch } = useContext(Context);
 
   useEffect(() => {
     const uploadImage = async () => {
       const imgName = uuidv4() + "." + file.name.split(".").pop();
       try {
         const url = await UploadFile(file, `hotels/${currentUser.id}`, imgName);
+        dispatch({ type: "UPDATE_IMAGES", payload: url });
         setImageURL(url as string);
       } catch (error) {
         console.log("upload error ", error);
