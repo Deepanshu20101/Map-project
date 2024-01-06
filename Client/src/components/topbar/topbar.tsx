@@ -4,7 +4,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import "./topbar.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/contextProvider";
 
 const Topbar = () => {
   const navigate = useNavigate();

@@ -1,23 +1,19 @@
 import { ReactNode, createContext, useEffect, useReducer } from "react";
+import reducer from "./reducer";
 
-interface AuthState {
-  currentUser: any;
-  loading: boolean;
-}
-
-interface AuthAction {
+interface Action {
   type: string;
   payload?: any;
 }
 
-interface AuthContextProviderProps {
+interface contextProviderProps {
   children: ReactNode;
 }
 
 interface AuthContextType {
   currentUser: any;
   loading: boolean;
-  dispatch: React.Dispatch<AuthAction>;
+  dispatch: React.Dispatch<Action>;
 }
 
 const currentUserStorage = localStorage.getItem("currentUser");
@@ -30,26 +26,13 @@ const initialState = {
 export const AuthContext = createContext<AuthContextType>({
   currentUser: null,
   loading: false,
-  dispatch: () => {},
+  dispatch: () => null,
 });
 
-const authReducer = (state: AuthState, action: AuthAction) => {
-  switch (action.type) {
-    case "LOGIN_START":
-      return { ...state, loading: true };
-    case "LOGIN_SUCCESS":
-      return { ...state, loading: false, currentUser: action.payload };
-    case "LOGOUT":
-      return { ...state, currentUser: null };
-    default:
-      throw new Error(`Unhandled action type: ${action.type}`);
-  }
-};
-
-export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
+export const ContextProvider: React.FC<contextProviderProps> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (state.currentUser) {

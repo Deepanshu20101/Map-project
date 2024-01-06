@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/contextProvider";
 
 const LoginPage = () => {
   const [formData, setFormData] = React.useState({
@@ -37,9 +37,7 @@ const LoginPage = () => {
         email: formData.email,
         password: formData.password,
       });
-      console.log(result);
       dispatch({ type: "LOGIN_SUCCESS", payload: result.data.result });
-      // console.log(result.status);
       navigate("/");
     } catch (error) {
       console.log(error);

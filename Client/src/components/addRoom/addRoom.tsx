@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/contextProvider";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import {
   Alert,

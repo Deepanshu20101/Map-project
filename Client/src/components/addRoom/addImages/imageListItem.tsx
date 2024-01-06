@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import UploadFile from "../../../firebase/uploadFile";
-import { AuthContext } from "../../../context/authContext";
+import { AuthContext } from "../../../context/contextProvider";
 
 interface ImageListItemProp {
   file: File;
