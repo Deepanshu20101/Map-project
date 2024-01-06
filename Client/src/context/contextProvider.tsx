@@ -10,7 +10,7 @@ interface contextProviderProps {
   children: ReactNode;
 }
 
-interface AuthContextType {
+interface ContextType {
   currentUser: any;
   loading: boolean;
   dispatch: React.Dispatch<Action>;
@@ -23,7 +23,7 @@ const initialState = {
   loading: false,
 };
 
-export const AuthContext = createContext<AuthContextType>({
+export const Context = createContext<ContextType>({
   currentUser: null,
   loading: false,
   dispatch: () => null,
@@ -43,7 +43,7 @@ export const ContextProvider: React.FC<contextProviderProps> = ({
   }, [state.currentUser]);
 
   return (
-    <AuthContext.Provider
+    <Context.Provider
       value={{
         currentUser: state.currentUser,
         loading: state.loading,
@@ -51,6 +51,6 @@ export const ContextProvider: React.FC<contextProviderProps> = ({
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </Context.Provider>
   );
 };

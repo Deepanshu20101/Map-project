@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../../context/contextProvider";
+import { Context } from "../../context/contextProvider";
 
 const LoginPage = () => {
   const [formData, setFormData] = React.useState({
@@ -20,7 +20,7 @@ const LoginPage = () => {
     password: "",
   });
 
-  const { loading, dispatch } = useContext(AuthContext);
+  const { loading, dispatch } = useContext(Context);
 
   const navigate = useNavigate();
 

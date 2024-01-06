@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import UploadFile from "../../../firebase/uploadFile";
-import { AuthContext } from "../../../context/contextProvider";
+import { Context } from "../../../context/contextProvider";
 
 interface ImageListItemProp {
   file: File;
@@ -9,7 +9,7 @@ interface ImageListItemProp {
 
 const ImageListItem: React.FC<ImageListItemProp> = ({ file }) => {
   const [imageURL, setImageURL] = useState<string | null>(null);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(Context);
 
   useEffect(() => {
     const uploadImage = async () => {

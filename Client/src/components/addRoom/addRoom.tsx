@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/contextProvider";
+import { Context } from "../../context/contextProvider";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import {
   Alert,
@@ -28,7 +28,7 @@ const AddRoom = () => {
     },
   ]);
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(Context);
 
   const findUnfinished = () => {
     return steps.findIndex((step) => !step.completed);
