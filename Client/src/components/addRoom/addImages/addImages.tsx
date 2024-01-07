@@ -16,11 +16,15 @@ const AddImages = () => {
   return (
     <>
       <Paper
+        elevation={4}
         sx={{
+          maxWidth: 700,
+          ml: "auto",
+          mr: "auto",
+          width: "100%",
           cursor: "pointer",
           background: "#fafafa",
           color: "#bdbdbd",
-          border: "1px dashed #ccc",
           "&:hover": { border: "1px solid #ccc" },
         }}
       >

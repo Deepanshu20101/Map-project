@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/userRoute");
+const hotelRoute = require("./routes/hotelRoute");
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 const port = 5000;
 
 app.use("/user", userRoute);
+app.use("/hotel", hotelRoute);
 
 const startServer = async () => {
   try {
