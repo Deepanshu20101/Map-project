@@ -2,7 +2,7 @@ interface State {
   currentUser: any;
   loading: boolean;
   images: string[];
-  details: { title: string; description: string };
+  details: { title: string; description: string; price: number };
 }
 
 interface Action {

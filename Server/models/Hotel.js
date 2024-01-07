@@ -9,6 +9,11 @@ const hotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
   images: {
     type: [],
   },

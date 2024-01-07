@@ -1,9 +1,13 @@
-import { Stack, TextField } from "@mui/material";
+import { Box, InputAdornment, Stack, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { Context } from "../../../context/contextProvider";
 
 const AddDetails = () => {
-  const [details, setDetails] = useState({ title: "", description: "" });
+  const [details, setDetails] = useState({
+    title: "",
+    description: "",
+    price: 0,
+  });
 
   const { dispatch } = useContext(Context);
 
@@ -19,13 +23,28 @@ const AddDetails = () => {
       spacing={2}
       sx={{ maxWidth: 500, ml: "auto", mr: "auto", width: "100%" }}
     >
-      <TextField
-        required
-        label="Title"
-        name="title"
-        onChange={handleChange}
-        value={details.title}
-      />
+      <Box sx={{ display: "flex" }}>
+        <TextField
+          required
+          label="Title"
+          name="title"
+          onChange={handleChange}
+          value={details.title}
+          sx={{ flexGrow: 1, pr: 2 }}
+        />
+        <TextField
+          type="number"
+          label="Price"
+          name="price"
+          inputProps={{ min: 0 }}
+          onChange={handleChange}
+          value={details.price}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+          sx={{ width: "12ch" }}
+        />
+      </Box>
       <TextField
         required
         multiline

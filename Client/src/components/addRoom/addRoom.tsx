@@ -36,7 +36,7 @@ const AddRoom = () => {
   const { currentUser, details, images } = useContext(Context);
 
   useEffect(() => {
-    if (details.title && details.description) {
+    if (details.title && details.description && details.price) {
       if (!steps[0].completed) {
         setComplete(0, true);
       }
@@ -96,6 +96,7 @@ const AddRoom = () => {
         {
           title: details.title,
           description: details.description,
+          price: details.price,
           images: images,
         }
       );

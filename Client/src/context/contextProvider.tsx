@@ -10,14 +10,14 @@ interface State {
   currentUser: any;
   loading: boolean;
   images: string[];
-  details: { title: string; description: string };
+  details: { title: string; description: string; price: number };
 }
 
 interface ContextProps {
   currentUser: any;
   loading: boolean;
   images: string[];
-  details: { title: string; description: string };
+  details: { title: string; description: string; price: number };
   dispatch: React.Dispatch<Action>;
 }
 
@@ -27,7 +27,7 @@ const initialState: State = {
   currentUser: currentUserStorage ? JSON.parse(currentUserStorage) : null,
   loading: false,
   images: [],
-  details: { title: "", description: "" },
+  details: { title: "", description: "", price: 0 },
 };
 
 interface ContextProviderProps {

@@ -5,6 +5,7 @@ const createHotel = async (req, res) => {
     const hotel = await Hotel.create({
       title: req.body.title,
       description: req.body.description,
+      price: req.body.price,
       images: req.body.images,
     });
     console.log(hotel);
