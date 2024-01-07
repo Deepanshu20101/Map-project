@@ -16,4 +16,17 @@ const createHotel = async (req, res) => {
   }
 };
 
-module.exports = { createHotel };
+const gettAllHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find();
+    if (!hotels || !hotels.length) {
+      return res.status(404).json({ message: "No Hotels found" });
+    }
+    res.status(200).json({ success: true, result: hotels });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = { createHotel, gettAllHotels };

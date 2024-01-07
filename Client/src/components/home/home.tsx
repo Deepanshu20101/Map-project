@@ -8,9 +8,20 @@ import {
   ImageListItemBar,
   Rating,
 } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface Hotel {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  images: string[];
+}
+
 const Content = () => {
+  const [hotels, setHotels] = useState<Hotel[]>([]);
   const navigate = useNavigate();
   const imgList = [
     {
@@ -55,14 +66,26 @@ const Content = () => {
     },
   ];
 
+  useEffect(() => {
+    const getHotels = async () => {
+      try {
+        const hotelList = await axios.get("http://localhost:5000/hotel");
+        setHotels(hotelList.data.result);
+      } catch (error) {
+        alert(`Error: ${error}`);
+      }
+    };
+    getHotels();
+  }, []);
+
   return (
     <>
       <Container>
         <ImageList gap={20} cols={3}>
-          {imgList.map((item) => (
-            <Card key={item.id} sx={{ borderRadius: 3 }}>
+          {hotels.map((hotel) => (
+            <Card key={hotel._id} sx={{ borderRadius: 3 }}>
               <Grow in>
-                <CardActionArea onClick={() => navigate(`/hotel/${item.id}`)}>
+                <CardActionArea onClick={() => navigate(`/hotel/${hotel._id}`)}>
                   <ImageListItem>
                     <ImageListItemBar
                       title="$1"
@@ -72,7 +95,7 @@ const Content = () => {
                       }}
                       position="top"
                     />
-                    <img src={item.src} loading="lazy" />
+                    <img src={hotel.images[0]} loading="lazy" />
                     <ImageListItemBar
                       title="aslkas"
                       subtitle="asknajsn"
