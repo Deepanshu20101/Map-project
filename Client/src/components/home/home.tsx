@@ -23,48 +23,6 @@ interface Hotel {
 const Content = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const navigate = useNavigate();
-  const imgList = [
-    {
-      id: 1,
-      src: "/img1.png",
-    },
-    {
-      id: 2,
-      src: "/img1.png",
-    },
-    {
-      id: 3,
-      src: "/img1.png",
-    },
-    {
-      id: 4,
-      src: "/img1.png",
-    },
-    {
-      id: 5,
-      src: "/img1.png",
-    },
-    {
-      id: 6,
-      src: "/img1.png",
-    },
-    {
-      id: 7,
-      src: "/img1.png",
-    },
-    {
-      id: 8,
-      src: "/img1.png",
-    },
-    {
-      id: 9,
-      src: "/img1.png",
-    },
-    {
-      id: 10,
-      src: "/img1.png",
-    },
-  ];
 
   useEffect(() => {
     const getHotels = async () => {
