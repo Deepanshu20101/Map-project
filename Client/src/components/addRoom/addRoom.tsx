@@ -17,6 +17,7 @@ import AddImages from "./addImages/addImages";
 import { Send } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AddLocation from "./addLocation/addLocation";
 
 const AddRoom = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -28,6 +29,10 @@ const AddRoom = () => {
     },
     {
       label: "Upload images",
+      completed: false,
+    },
+    {
+      label: "Add location",
       completed: false,
     },
   ]);
@@ -125,6 +130,7 @@ const AddRoom = () => {
               {
                 0: <AddDetails />,
                 1: <AddImages />,
+                2: <AddLocation />,
               }[activeStep]
             }
             <Stack

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Map, Marker, Popup } from "react-map-gl";
+import { Map, MapLayerMouseEvent, Marker, Popup } from "react-map-gl";
 import RoomIcon from "@mui/icons-material/Room";
 import { Card, CardHeader, Container } from "@mui/material";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -19,8 +19,8 @@ const MapView = () => {
     latitude: 28.6139,
     zoom: 4,
   });
-  const [showPopup, setShowPopup] = useState<boolean>(true);
   const [pins, setPins] = useState<Pin[]>([]);
+  const [currentPopup, setCurrentPopup] = useState<string | null>(null);
 
   useEffect(() => {
     const getAllPins = async () => {
@@ -34,8 +34,13 @@ const MapView = () => {
     getAllPins();
   }, []);
 
+  const handleCurrentPopup = (id: string, long: number, lat: number) => {
+    setCurrentPopup(id);
+    setViewState({ ...viewState, longitude: long, latitude: lat });
+  };
+
   return (
-    <Container sx={{ height: "25rem", bgcolor: "burlywood" }}>
+    <Container sx={{ height: "25rem" }}>
       <Map
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
         {...viewState}
@@ -45,15 +50,23 @@ const MapView = () => {
       >
         {pins.map((pinItem) => (
           <React.Fragment key={pinItem._id}>
-            <Marker longitude={77.209} latitude={28.6139}>
-              <RoomIcon sx={{ color: "slateblue" }} />
+            <Marker longitude={pinItem.long} latitude={pinItem.lat}>
+              <RoomIcon
+                style={{ color: "slateblue" }}
+                onClick={() =>
+                  handleCurrentPopup(pinItem._id, pinItem.long, pinItem.lat)
+                }
+                cursor="pointer"
+              />
             </Marker>
-            {showPopup && (
+            {pinItem._id === currentPopup && (
               <Popup
                 longitude={pinItem.long}
                 latitude={pinItem.lat}
                 anchor="bottom-left"
-                onClose={() => setShowPopup(false)}
+                closeButton={true}
+                closeOnClick={false}
+                onClose={() => setCurrentPopup(null)}
               >
                 <Card>
                   <CardHeader title="You are here" />
