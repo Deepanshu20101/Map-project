@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/userRoute");
 const hotelRoute = require("./routes/hotelRoute");
+const pinRoute = require("./routes/pinRoute");
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const port = 5000;
 
 app.use("/user", userRoute);
 app.use("/hotel", hotelRoute);
+app.use("/pin", pinRoute);
 
 const startServer = async () => {
   try {

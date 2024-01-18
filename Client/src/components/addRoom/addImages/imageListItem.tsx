@@ -19,7 +19,7 @@ const ImageListItem: React.FC<ImageListItemProp> = ({ file }) => {
         dispatch({ type: "UPDATE_IMAGES", payload: url });
         setImageURL(url as string);
       } catch (error) {
-        console.log("upload error ", error);
+        alert(`Error: ${error}`);
       }
     };
     uploadImage();
