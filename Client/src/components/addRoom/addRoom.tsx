@@ -38,7 +38,8 @@ const AddRoom = () => {
   ]);
 
   const navigate = useNavigate();
-  const { currentUser, details, images } = useContext(Context);
+  const { dispatch, currentUser, details, images, location } =
+    useContext(Context);
 
   useEffect(() => {
     if (details.title && details.description && details.price) {
@@ -57,6 +58,14 @@ const AddRoom = () => {
       if (steps[1].completed) setComplete(1, false);
     }
   }, [images]);
+
+  useEffect(() => {
+    if (location.lng && location.lat) {
+      if (!steps[2].completed) setComplete(2, true);
+    } else {
+      if (steps[2].completed) setComplete(2, false);
+    }
+  }, [location]);
 
   const setComplete = (idx: number, status: boolean) => {
     setSteps((steps) => {
@@ -103,8 +112,11 @@ const AddRoom = () => {
           description: details.description,
           price: details.price,
           images: images,
+          location: location,
         }
       );
+      dispatch({ type: "RESET_IMAGES" });
+      dispatch({ type: "RESET_LOCATION" });
       console.log(result);
       navigate("/");
     } catch (error) {

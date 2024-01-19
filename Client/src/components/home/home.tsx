@@ -44,18 +44,31 @@ const Content = () => {
             <Card key={hotel._id} sx={{ borderRadius: 3 }}>
               <Grow in>
                 <CardActionArea onClick={() => navigate(`/hotel/${hotel._id}`)}>
-                  <ImageListItem>
+                  <ImageListItem
+                    style={{
+                      height: "200px",
+                    }}
+                  >
                     <ImageListItemBar
-                      title="$1"
+                      title={`${hotel.price}$`}
                       sx={{
                         background:
                           "linear-gradient(to bottom, rgba(0,0,0,0.7)0%, rgba(0,0,0,0.3)70%, rgba(0,0,0,0)100%)",
                       }}
                       position="top"
                     />
-                    <img src={hotel.images[0]} loading="lazy" />
+                    <img
+                      src={hotel.images[0]}
+                      alt={hotel.title}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
                     <ImageListItemBar
-                      title="aslkas"
+                      title={hotel.title}
                       subtitle="asknajsn"
                       actionIcon={
                         <Rating

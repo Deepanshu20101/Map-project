@@ -17,6 +17,10 @@ const hotelSchema = new mongoose.Schema({
   images: {
     type: [],
   },
+  location: {
+    lng: { type: Number, required: true },
+    lat: { type: Number, required: true },
+  },
 });
 
 const Hotel = mongoose.model("Hotel", hotelSchema);

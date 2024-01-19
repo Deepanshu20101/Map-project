@@ -1,7 +1,8 @@
 import { Card, CardHeader, Container } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Map, MapLayerMouseEvent, Marker, Popup } from "react-map-gl";
 import RoomIcon from "@mui/icons-material/Room";
+import { Context } from "../../../context/contextProvider";
 
 interface NewHotelPlace {
   long: number;
@@ -18,12 +19,15 @@ const AddLocation = () => {
     null
   );
 
+  const { dispatch, location } = useContext(Context);
+
   const handleHotelAdd = (e: MapLayerMouseEvent) => {
     const { lng, lat } = e.lngLat;
     setNewHotelPlace({
       long: lng,
       lat: lat,
     });
+    dispatch({ type: "UPDATE_LOCATION", payload: { lng: lng, lat: lat } });
   };
 
   return (

@@ -7,6 +7,7 @@ const createHotel = async (req, res) => {
       description: req.body.description,
       price: req.body.price,
       images: req.body.images,
+      location: req.body.location,
     });
     console.log(hotel);
     res.status(200).json({ message: "Hotel created successfully" });

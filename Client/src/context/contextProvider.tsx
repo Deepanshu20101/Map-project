@@ -11,6 +11,7 @@ interface State {
   loading: boolean;
   images: string[];
   details: { title: string; description: string; price: number };
+  location: { lng: number; lat: number };
 }
 
 interface ContextProps {
@@ -18,6 +19,7 @@ interface ContextProps {
   loading: boolean;
   images: string[];
   details: { title: string; description: string; price: number };
+  location: { lng: number; lat: number };
   dispatch: React.Dispatch<Action>;
 }
 
@@ -28,6 +30,7 @@ const initialState: State = {
   loading: false,
   images: [],
   details: { title: "", description: "", price: 0 },
+  location: { lng: 0, lat: 0 },
 };
 
 interface ContextProviderProps {
@@ -39,6 +42,7 @@ export const Context = createContext<ContextProps>({
   loading: initialState.loading,
   images: initialState.images,
   details: initialState.details,
+  location: initialState.location,
   dispatch: () => {},
 });
 
@@ -62,6 +66,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         loading: state.loading,
         images: state.images,
         details: state.details,
+        location: state.location,
         dispatch,
       }}
     >
