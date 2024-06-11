@@ -77,7 +77,7 @@ const MapView = () => {
                 onClose={() => setCurrentPopup(null)}
               >
                 <Card>
-                  <CardHeader title="You are here" />
+                  <CardHeader title={hotelRoom.title} />
                 </Card>
               </Popup>
             )}
