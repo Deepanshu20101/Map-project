@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Map, MapLayerMouseEvent, Marker, Popup } from "react-map-gl";
 import RoomIcon from "@mui/icons-material/Room";
-import { Card, CardHeader, Container } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from "axios";
+import "./map.css";
 
 interface Hotel {
   _id: string;
@@ -75,9 +83,17 @@ const MapView = () => {
                 closeButton={true}
                 closeOnClick={false}
                 onClose={() => setCurrentPopup(null)}
+                className="roomPopup"
               >
                 <Card>
-                  <CardHeader title={hotelRoom.title} />
+                  <CardMedia
+                    component="img"
+                    sx={{ width: 240, height: 140 }}
+                    image={hotelRoom.images[0]}
+                  />
+                  <CardContent>
+                    <Typography variant="h5">{hotelRoom.title}</Typography>
+                  </CardContent>
                 </Card>
               </Popup>
             )}

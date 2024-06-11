@@ -1,0 +1,4 @@
+.roomPopup .mapboxgl-popup-content {
+  padding: 0;
+  box-shadow: none;
+}
